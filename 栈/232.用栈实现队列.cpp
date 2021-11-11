@@ -4,9 +4,11 @@
  * [232] 用栈实现队列
  */
 
+
+
 // @lc code=start
 class MyQueue {
-    stack<int> sin,sout;
+    stack<int> sin, sout;
 
 public:
     MyQueue() {
