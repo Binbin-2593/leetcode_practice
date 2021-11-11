@@ -5,7 +5,6 @@
  */
 
 
-
 // @lc code=start
 class MyQueue {
     stack<int> sin, sout;
