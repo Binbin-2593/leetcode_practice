@@ -79,7 +79,7 @@ public:
     ListNode* deleteDuplicates(ListNode*head){
         ListNode *dummy = new ListNode(10000);
         ListNode *curr = dummy;//使用哑节点的好处是不用想上面那些方法那样，考虑边界条件
-        ListNode *p;
+        ListNode *p=nullptr;
         dummy->next = head;
 
         while(curr->next!=nullptr){
