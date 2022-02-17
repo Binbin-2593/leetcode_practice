@@ -35,6 +35,31 @@ public:
     }
 };
 
+
+//双指针，此解法要求nums有序
+// class Solution {
+// public:
+//     vector<int> twoSum(vector<int>& nums, int target) {
+//         int i=0,j=nums.size()-1,sum=0;
+//         while(i<j){
+//             sum=nums[i]+nums[j];
+//             if(sum==target)
+//                 //break;
+//                 return {i, j};
+//             if (sum < target)
+//                 ++i;
+//             else
+//                 --j;
+
+//             // (sum == target) ? return {i, j} : (sum < target )? ++i
+//                                                          //
+//                                                          : --j;
+//             //这里是错误的，不是这样用的，条件运算符是对：发生赋值语句的条件判断语句的简写
+//         }
+//         return {};
+//     }
+// };
+
 //这种存在键值对关系的查找问题记得使用unordered_map
 //有一种用法思想是：先创建一个空unordered_map，在后面遍历数据时同时使用上它
 // @lc code=end
