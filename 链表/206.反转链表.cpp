@@ -27,6 +27,7 @@ public:
         // ListNode *curr = head;
         // ListNode*prev=nullptr;
         // while (curr){
+            //next用于做好记录，防止丢失
         //     ListNode*next=curr->next;
         //     curr->next=prev;
         //     prev=curr;
@@ -44,6 +45,27 @@ public:
         head->next=nullptr;
         return newhead;
         //代码次序：递归终止条件判断->递归调用->解决最低层级问题的代码->return
+
+        // if(head==nullptr||head->next==nullptr) return head;
+
+        // ListNode *cur = head,*prev=nullptr;
+        // while(cur){
+        //     ListNode *next = cur->next;
+        //     cur->next=prev;
+        //     prev=cur;
+        //     cur=next;
+           
+        // }
+        // return prev;
+
+
+        // if(head==nullptr||head->next==nullptr)
+        //     return head;
+        // ListNode *newhead = reverseList(head->next);
+        // head->next->next = head;
+        // head->next=nullptr;
+
+        // return newhead;
     }
 };
 // @lc code=end
