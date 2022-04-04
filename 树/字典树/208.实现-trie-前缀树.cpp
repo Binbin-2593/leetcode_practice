@@ -12,12 +12,12 @@ private:
     bool isEnd;
     /*struct TrieNode{
        bool isEnd; //该结点是否是一个串的结束
-       TrieNode* next[26]; //字母映射表
+       TrieNode* children[26]; //字母映射表
     }
     */
 
     Trie* searchPrefix(string prefix) {
-        Trie* node = this;
+        Trie* node = this;//指向类对象本身，这里就是指向根节点了
         for (char ch : prefix) {
             ch -= 'a';
             if (node->children[ch] == nullptr) {
@@ -38,9 +38,9 @@ public:
             if (node->children[ch] == nullptr) {
                 node->children[ch] = new Trie();
             }
-            node = node->children[ch];
+            node = node->children[ch];//链表指针移动
         }
-        node->isEnd = true;
+        node->isEnd = true;//最后一个节点字符串结尾标识为true
     }
 
     bool search(string word) {

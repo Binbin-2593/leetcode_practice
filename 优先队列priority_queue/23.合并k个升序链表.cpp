@@ -1,4 +1,12 @@
 /*
+ * @Author: your name
+ * @Date: 2022-02-17 21:31:10
+ * @LastEditTime: 2022-04-04 16:51:07
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /.leetcode/优先队列priority_queue/23.合并k个升序链表.cpp
+ */
+/*
  * @lc app=leetcode.cn id=23 lang=cpp
  *
  * [23] 合并K个升序链表
@@ -37,6 +45,7 @@ public:
             }
         }
 
+        //往往是经过一个迭代过程产生一个链表这种使用哑节点
         ListNode* dummy=new ListNode(0),*curr=dummy;
         while(!p.empty()){
             curr->next=p.top();

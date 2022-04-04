@@ -1,4 +1,12 @@
 /*
+ * @Author: your name
+ * @Date: 2022-01-17 16:43:28
+ * @LastEditTime: 2022-03-31 20:00:30
+ * @LastEditors: your name
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /.leetcode/链表/206.反转链表.cpp
+ */
+/*
  * @lc app=leetcode.cn id=206 lang=cpp
  *
  * [206] 反转链表
@@ -25,7 +33,7 @@ public:
         //     return head;
         
         // ListNode *curr = head;
-        // ListNode*prev=nullptr;
+        // ListNode *prev=nullptr;
         // while (curr){
             //next用于做好记录，防止丢失
         //     ListNode*next=curr->next;

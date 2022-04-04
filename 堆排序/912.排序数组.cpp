@@ -1,4 +1,12 @@
 /*
+ * @Author: your name
+ * @Date: 2022-02-25 10:42:53
+ * @LastEditTime: 2022-04-03 22:34:42
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /.leetcode/堆排序/912.排序数组.cpp
+ */
+/*
  * @lc app=leetcode.cn id=912 lang=cpp
  *
  * [912] 排序数组
@@ -19,9 +27,11 @@ class Solution {
             } else {
                 large = i;
             }
+            
             if (rson <= len && nums[rson] > nums[large]) {
                 large = rson;
             }
+
             if (large != i) {
                 swap(nums[i], nums[large]);
                 i = large;
@@ -43,7 +53,8 @@ class Solution {
         int len = (int)nums.size() - 1;
         buildMaxHeap(nums, len);
         for (int i = len; i >= 1; --i) {
-            //注意i的下限
+            //注意i的上限和下限
+            //把begin()处的最值移到end()处
             swap(nums[i], nums[0]);
             --len;
             maxHeapadjust(nums, 0, len);
