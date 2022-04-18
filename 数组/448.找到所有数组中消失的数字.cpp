@@ -1,4 +1,12 @@
 /*
+ * @Author: your name
+ * @Date: 2022-02-15 21:57:04
+ * @LastEditTime: 2022-04-18 22:03:07
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /.leetcode/数组/448.找到所有数组中消失的数字.cpp
+ */
+/*
  * @lc app=leetcode.cn id=448 lang=cpp
  *
  * [448] 找到所有数组中消失的数字
@@ -46,12 +54,12 @@ public:
                 nums[pos] = -nums[pos];
         }//由n个属于1～n的整数的特殊性
 
+        //前面取负，哪个数没出现，那么它做下标的那个元素就是正
         for (int i = 0;i<nums.size();++i){
             if(nums[i]>0)
                 ans.push_back(i + 1);
         }
-        return ans;
-        
+        return ans;    
     }
 };
 // @lc code=end
