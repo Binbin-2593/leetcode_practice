@@ -51,7 +51,7 @@ public:
                     grid[i][j] = 0;
 
                     stack<pair<int,int>> island;
-                    island.push({i, j});
+                    island.push({i, j});//迭代需要的初始化
                     while(!island.empty()){
                         //对pair变量的取用方式
                         auto [r,c]=island.top();

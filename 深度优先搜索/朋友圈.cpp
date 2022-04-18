@@ -1,4 +1,12 @@
 /*
+ * @Author: your name
+ * @Date: 2022-03-16 22:09:44
+ * @LastEditTime: 2022-04-06 16:04:59
+ * @LastEditors: your name
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /.leetcode/深度优先搜索/朋友圈.cpp
+ */
+/*
 班上有N名学生。其中有些人是朋友，有些则不是。他们的友谊具有是传递性。
 如果已知A是B的朋友，B是C的朋友，那么我们可以认为A也是C的朋友。所谓的朋友圈，是指所有朋友的集合。
 给定一个 N * N 的矩阵 M，表示班级中学生之间的朋友关系。
@@ -34,6 +42,7 @@ public:
     //递归
     void dfs(vector<vector<int>>&friends,vector<bool>&visited,int i){
         //step1:处理当前节点
+        //dfs都是要做好记录的
         visited[i]=true;
         //step2:开始递归
         for(int j=0; j<n; ++j){
