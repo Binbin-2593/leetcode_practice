@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 17:39:52
- * @LastEditTime: 2022-04-13 21:39:17
+ * @LastEditTime: 2022-04-20 12:16:03
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /.leetcode/深度优先搜索/回溯法/51.n-皇后.cpp
@@ -31,7 +31,7 @@ public:
 
     void backtrack(vector<vector<string>>&ans,vector<string>& board,vector<bool>& column,vector<bool>& ldiag,vector<bool>& rdiag,int n,int row){
         if(row==n){
-            ans.push_back(board);
+            ans.emplace_back(board);
             return;
         }
 

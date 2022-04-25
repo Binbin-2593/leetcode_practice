@@ -1,4 +1,12 @@
 /*
+ * @Author: your name
+ * @Date: 2022-03-03 15:42:07
+ * @LastEditTime: 2022-04-19 16:11:32
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /.leetcode/链表/24.两两交换链表中的节点.cpp
+ */
+/*
  * @lc app=leetcode.cn id=24 lang=cpp
  *
  * [24] 两两交换链表中的节点
@@ -36,9 +44,11 @@ public:
         //     cur=prev->next;
         // }//引入dummy就应该把dummy节点也画进链表草稿图中演示
 
-        ListNode *dummy = new ListNode(0);
-        dummy->next = head;
-        ListNode *tmp=dummy;
+        // ListNode *dummy = new ListNode(0);
+        // dummy->next = head;
+        //不要用上面两句new的方式，需要释放内存
+        ListNode dummy (-1, head);
+        ListNode *tmp = &dummy;
         //循环条件一定要清楚的演示出来
         while (tmp->next!=nullptr&&tmp->next->next!=nullptr){
             ListNode *n1 = tmp->next, *n2 = tmp->next->next;
@@ -47,7 +57,7 @@ public:
             n2->next = n1;
             tmp = n1;
         }
-        return dummy->next;
+        return dummy.next;
     }
 };
 // @lc code=end

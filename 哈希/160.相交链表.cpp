@@ -1,4 +1,12 @@
 /*
+ * @Author: your name
+ * @Date: 2022-03-03 17:57:13
+ * @LastEditTime: 2022-04-20 12:15:14
+ * @LastEditors: your name
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /.leetcode/哈希/160.相交链表.cpp
+ */
+/*
  * @lc app=leetcode.cn id=160 lang=cpp
  *
  * [160] 相交链表
@@ -19,7 +27,7 @@ public:
         unordered_set<ListNode *> sl;
         ListNode *tmp = headA;
         while(tmp){
-            sl.insert(tmp);
+            sl.emplace(tmp);
             tmp = tmp->next;
         }
         tmp = headB;

@@ -1,4 +1,12 @@
 /*
+ * @Author: your name
+ * @Date: 2022-02-23 16:26:37
+ * @LastEditTime: 2022-04-20 22:27:41
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /.leetcode/二分查找/81.搜索旋转排序数组-ii.cpp
+ */
+/*
  * @lc app=leetcode.cn id=81 lang=cpp
  *
  * [81] 搜索旋转排序数组 II
@@ -29,6 +37,7 @@ public:
             //观察得到：nums[start]>=nums[end]
             if(nums[l]==nums[mid])
                 ++l;
+                //l = mid + 1;
             else if (nums[mid] <= nums[r])
             {
                 if(nums[mid]<target&&target<=nums[r])

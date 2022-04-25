@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-02-27 16:55:02
- * @LastEditTime: 2022-04-05 15:06:40
+ * @LastEditTime: 2022-04-20 12:13:55
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /.leetcode/哈希/128.最长连续序列.cpp
@@ -18,7 +18,7 @@ public:
     int longestConsecutive(vector<int>& nums) {
         unordered_set<int> hash;
         for(const auto& num : nums)
-            hash.insert(num);
+            hash.emplace(num);
         int ans = 0;
         while(!hash.empty()){
             int cur = *(hash.begin());

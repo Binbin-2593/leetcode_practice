@@ -10,6 +10,7 @@ public:
     vector<int> searchRange(vector<int>& nums, int target) {
         if(nums.empty())
             return {-1, -1};
+        //产生了一个左闭右开的区间
         int lower = lower_bound(nums, target);
         int upper = upper_bound(nums, target)-1;
         if (lower==nums.size()||nums[lower]>target)

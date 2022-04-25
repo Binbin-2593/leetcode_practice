@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-13 21:42:27
- * @LastEditTime: 2022-04-13 22:22:31
+ * @LastEditTime: 2022-04-20 12:17:37
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /.leetcode/深度优先搜索/回溯法/78.子集.cpp
@@ -21,7 +21,7 @@ public:
         vector<int> media={};
     
         if (nums.empty()){
-            ans.push_back(media);
+            ans.emplace_back(media);
             return ans;
         }
 
@@ -29,13 +29,13 @@ public:
         return ans;
     }
     void backtrack(vector<vector<int>>& ans,vector<int>& media,vector<int>& nums,int pos){
-        ans.push_back(media);
+        ans.emplace_back(media);
         if(pos==nums.size()){
             return;
         }
         
         for(int i=pos; i<nums.size();++i){
-            media.push_back(nums[i]);
+            media.emplace_back(nums[i]);
             backtrack(ans, media, nums, i + 1);//注意理解这里pos的形参为i+1
             media.pop_back();
         }
