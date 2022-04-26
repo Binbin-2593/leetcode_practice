@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2022-02-24 20:17:34
+ * @LastEditTime: 2022-04-26 11:11:23
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /.leetcode/分治/归并排序/merge_sort.h
+ */
 class Solution {
 public:
     vector<int> sortArray(vector<int>& nums) {
@@ -17,7 +25,7 @@ public:
             merge_sort(nums, mid + 1, r, temp);
 
 
-            //合并
+            //合并（双指针合并两个有序序列成一个有序序列）
             int i = l, j = mid + 1, cur=0;
             //1.两子列都有元素
             while(i<=mid&&j<=r){

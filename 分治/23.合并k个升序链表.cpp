@@ -1,4 +1,12 @@
 /*
+ * @Author: your name
+ * @Date: 2022-02-18 15:47:28
+ * @LastEditTime: 2022-04-26 11:16:43
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /.leetcode/分治/23.合并k个升序链表.cpp
+ */
+/*
  * @lc app=leetcode.cn id=23 lang=cpp
  *
  * [23] 合并K个升序链表
@@ -17,7 +25,7 @@
  */
 class Solution {
 public:
-        //1.局部两个合并
+        //1.局部两个合并(双指针思想合并两个有序链表)
         ListNode* mergetwoLists(ListNode*l1,ListNode* l2){
             if(l1 == nullptr)
                 return l2;
@@ -40,7 +48,7 @@ public:
             if(l>r) return nullptr;
             if(l==r)
                 return lists[l];
-            int mid = (l+r)/2;
+            int mid = l+(r-l)/2;
             return mergetwoLists(merge(lists, l, mid), merge(lists, mid + 1, r));
         }
 
