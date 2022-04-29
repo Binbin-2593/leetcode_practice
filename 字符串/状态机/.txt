@@ -1,0 +1,5 @@
+剑指offer：67.cpp
+此题还有
+    1.关于switch中continue、break的使用
+    2.char数字转int
+    3.溢出处理问题
