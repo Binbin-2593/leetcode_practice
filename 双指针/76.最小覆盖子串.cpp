@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-25 15:21:55
- * @LastEditTime: 2022-04-25 16:13:07
+ * @LastEditTime: 2022-04-28 13:31:53
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /.leetcode/双指针/76.最小覆盖子串.cpp
@@ -11,7 +11,8 @@
  *
  * [76] 最小覆盖子串
  */
-
+//本题中的滑窗以整个研究序列为对象产生滑窗（初始l=0 ,r做循环控制）
+//r往前滑，遇到情况，处理：l变化
 // @lc code=start
 class Solution {
 public:
