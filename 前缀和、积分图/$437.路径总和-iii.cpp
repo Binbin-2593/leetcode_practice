@@ -1,4 +1,12 @@
 /*
+ * @Author: your name
+ * @Date: 2022-03-08 11:21:13
+ * @LastEditTime: 2022-05-01 17:38:14
+ * @LastEditors: your name
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /.leetcode/前缀和、积分图/437.路径总和-iii.cpp
+ */
+/*
  * @lc app=leetcode.cn id=437 lang=cpp
  *
  * [437] 路径总和 III
@@ -18,6 +26,7 @@
  */
 class Solution {
 public:
+    //题目既要和又要和的数量，所以map
     unordered_map<long long, int> hashmap;
     int pathSum(TreeNode *root, int targetSum){
         //键值表示前缀和的数值，实值表示次前缀和值的个数

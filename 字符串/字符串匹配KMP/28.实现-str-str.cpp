@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-28 17:26:21
- * @LastEditTime: 2022-04-28 18:26:32
+ * @LastEditTime: 2022-05-01 14:28:43
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /.leetcode/字符串/字符串匹配KMP/28.实现-str-str.cpp
@@ -37,13 +37,14 @@ public:
     void calNext(const string &needle, vector<int> &next) {
         for (int j = 1, t = -1; j < needle.length(); ++j) { 
             //j对应后缀,t对应前缀
+            //t是一个前缀和
             while (t > -1 && needle[t+1] != needle[j]) {
                 t = next[t]; // 如果下一位不同，往前回溯 
             }
             if (needle[t+1] == needle[j]) {
                 ++t; //如果下一位相同，更新相同的最大前后缀长
             }
-            next[j] = t; 
+            next[j] = t;//处理初始边界 
         }
     }
 };
