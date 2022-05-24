@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-04-25 21:06:13
- * @LastEditTime: 2022-04-25 21:48:33
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-05-18 20:29:08
+ * @LastEditors: Binbin-2593 1600382936@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /.leetcode/z剑指offer/21.cpp
  */
@@ -33,7 +33,7 @@ class Solution {
 public:
     vector<int> exchange(vector<int>& nums) {
         int s = 0,f=0;
-        while (f==nums.size()){
+        while (f<nums.size()){
             if(nums[f]&1){
                 swap(nums[s], nums[f]);
                 ++s;//有操作才++slow

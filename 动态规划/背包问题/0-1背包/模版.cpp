@@ -2,7 +2,7 @@
  * @Author: Binbin-2593 1600382936@qq.com
  * @Date: 2022-05-09 18:58:55
  * @LastEditors: Binbin-2593 1600382936@qq.com
- * @LastEditTime: 2022-05-10 13:09:29
+ * @LastEditTime: 2022-05-13 17:46:30
  * @FilePath: /.leetcode/动态规划/背包问题/0-1背包/二维.cpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -11,7 +11,7 @@ int knapsack(vector<int>weights,vector<int>values,int N,int W){
     vector<vector<int>> dp(N+1,vector<int>(W+1,0));//dp[i][j] 表示前 i 件物品体积不超过 j 的情况下能达到的最大价值
     for (int i = 1; i <= N;++i){
         int w = weights[i - 1], v = values[i - 1];
-        for (int j = 1;j<=W;++j){
+        for (int j = 1;j<=W;++j){//关于两个for循环，可同遍历二维数组理解
             if(j>=w){ 
             //目前背包容量j，能装下i;
                 //1.不装：dp[i - 1][j]。

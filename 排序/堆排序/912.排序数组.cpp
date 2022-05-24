@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-02-25 10:42:53
- * @LastEditTime: 2022-04-03 22:34:42
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-05-24 15:40:10
+ * @LastEditors: Binbin-2593 1600382936@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /.leetcode/堆排序/912.排序数组.cpp
  */
@@ -56,7 +56,7 @@ class Solution {
             //注意i的上限和下限
             //把begin()处的最值移到end()处
             swap(nums[i], nums[0]);
-            --len;
+            --len;//一次只交换一个，然后进行堆调整
             maxHeapadjust(nums, 0, len);
         }
     }
@@ -67,6 +67,50 @@ public:
     }
 };
 
+//默写1
+class Solution {
+    //堆调整
+    void maxHeapadjust(vector<int>&nums,int i,int len){
+        while (i*2+1<=len){
+            int l=i*2+1,r=i*2+2,large;
+            if(l<=len&&nums[l]>nums[i]){
+                large = l;
+            }else{
+                large = i;
+            }
+            if(r<=len&&nums[r]>nums[large]){
+                large = r;
+            }
+            if(large!=i){
+                swap(nums[i],nums[large]);
+                i=large;//更新i继续检查调整
+            }else{
+                break;//i没问题，跳出调整
+            }
+        }
+    }
+    //建堆
+    void maxHeapbuild(vector<int>&nums,int len){
+        for (int i = len / 2; i >= 0;--i){
+            maxHeapadjust(nums, i, len);
+        }
+    }
+    //排序
+    void heapSort(vector<int>&nums){
+        int len=nums.size()-1;
+        maxHeapbuild(nums,len);
+        for (int j = len; j >= 1;--j){
+            swap(nums[j], nums[0]);
+            --len;
+            maxHeapadjust(nums,0,len);
+        }
+    }
+pbulic:
+    vector<int> sortArray(vector<int>&nums){
+        heapSort(nums);
+        return nums;
+    }
+};
 
 // @lc code=end
 
