@@ -1,4 +1,12 @@
 /*
+ * @Author: Binbin-2593 1600382936@qq.com
+ * @Date: 2022-03-07 11:28:04
+ * @LastEditors: Binbin-2593 1600382936@qq.com
+ * @LastEditTime: 2022-05-26 16:04:26
+ * @FilePath: /.leetcode/树/543.二叉树的直径.cpp
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
+/*
  * @lc app=leetcode.cn id=543 lang=cpp
  *
  * [543] 二叉树的直径
@@ -34,5 +42,20 @@ public:
         return max(l, r) + 1;//递归本身可以通过return一直一层层连续贯穿返回一个变量
     }//本体思路
 };
+//默写1
+//求每一个节点左右子树高度和
+class Solution{
+public:
+    int diameterOfBinaryTree(TreeNode*root){
+        int maxDiameter = 0;
+        helper(root, maxDiameter);
+        return maxDiameter;
+    }
+    int helper(TreeNode *root,int &diameter){//此函数return的是树的高度
+        if(root==nullptr)return 0;
+        int l = helper(root->left, diameter), r = helper(root->right, diameter);
+        diameter = max(l + r, diameter);
+        return max(l, r) + 1;
+    }
+};
 // @lc code=end
-

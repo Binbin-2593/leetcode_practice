@@ -1,4 +1,12 @@
 /*
+ * @Author: Binbin-2593 1600382936@qq.com
+ * @Date: 2022-03-14 18:44:40
+ * @LastEditors: Binbin-2593 1600382936@qq.com
+ * @LastEditTime: 2022-05-27 18:00:14
+ * @FilePath: /.leetcode/树/字典树/208.实现-trie-前缀树.cpp
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
+/*
  * @lc app=leetcode.cn id=208 lang=cpp
  *
  * [208] 实现 Trie (前缀树)
@@ -52,8 +60,6 @@ public:
         return this->searchPrefix(prefix) != nullptr;
     }
 };
-
-
 /**
  * Your Trie object will be instantiated and called as such:
  * Trie* obj = new Trie();

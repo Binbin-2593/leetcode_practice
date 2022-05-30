@@ -1,4 +1,12 @@
 /*
+ * @Author: Binbin-2593 1600382936@qq.com
+ * @Date: 2022-03-11 09:59:06
+ * @LastEditors: Binbin-2593 1600382936@qq.com
+ * @LastEditTime: 2022-05-27 17:30:37
+ * @FilePath: /.leetcode/树/1110.删点成林.cpp
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
+/*
  * @lc app=leetcode.cn id=1110 lang=cpp
  *
  * [1110] 删点成林
@@ -52,5 +60,33 @@ public:
         return root;
     }
 };
-// @lc code=end
+//默写1
+class Solution {
+   vector<TreeNode*> delNodes(TreeNode* root, vector<int>& to_delete){
+       vector<TreeNode*> ans;
+       unordered_set<int> hash(to_delete.begin(),to_delete.end());
 
+       root=help(root, ans, hash);
+       if(!root){
+           ans.emplace_back(root);
+       }
+       return ans;
+   }
+   TreeNode* help(TreeNode* root, vector<TreeNode* >&ans,unordered_set<int>&hash){
+       if(root==nullptr)
+           return root;
+       root->left = help(root->left, ans, hash);
+       root->right = help(root->right, ans, hash);
+       if(hash.count(root->val)){
+           if (root->left){
+               ans.emplace_back(root->left);
+           }
+           if(root->right){
+               ans.emplace_back(root->right);
+           }
+           root = NULL;
+       }
+       return root;
+   }
+};
+// @lc code=end
