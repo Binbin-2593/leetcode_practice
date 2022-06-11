@@ -1,4 +1,12 @@
 /*
+ * @Author: Binbin-2593 1600382936@qq.com
+ * @Date: 2022-02-21 18:28:33
+ * @LastEditors: Binbin-2593 1600382936@qq.com
+ * @LastEditTime: 2022-06-10 17:40:50
+ * @FilePath: /.leetcode/二分查找/34.在排序数组中查找元素的第一个和最后一个位置.cpp
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
+/*
  * @lc app=leetcode.cn id=34 lang=cpp
  *
  * [34] 在排序数组中查找元素的第一个和最后一个位置
@@ -32,7 +40,6 @@ public:
     }
     //第一个大于target的元素的下标
     int upper_bound(vector<int>&nums,int target){
-
         int l = 0,r = nums.size(),mid = 0;
         while(l<r){
             mid = (l + r) / 2;
@@ -43,7 +50,7 @@ public:
             }
         }
         return l;
-        }
+    }
 };
 // @lc code=end
 

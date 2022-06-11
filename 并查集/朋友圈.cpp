@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-04-17 19:51:39
- * @LastEditTime: 2022-04-17 20:03:42
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-06-02 22:32:42
+ * @LastEditors: Binbin-2593 1600382936@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /.leetcode/并查集/朋友圈.cpp
  */
@@ -50,7 +50,7 @@ public:
         int m=friends.size(),n=friends[0].size();
         UF uf(m);
         for (int i = 0;i<m;++i){
-            for (int j;j<n;++j){
+            for (int j=0;j<n;++j){
                 if(friends[i][j]==1){
                     uf.connect(i, j);
                 }

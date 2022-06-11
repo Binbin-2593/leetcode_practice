@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-04-17 16:52:43
- * @LastEditTime: 2022-04-17 20:07:19
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-06-02 22:13:39
+ * @LastEditors: Binbin-2593 1600382936@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /.leetcode/并查集/UF.h
  */
@@ -33,7 +33,7 @@ public:
     }
     
     int find(int p){
-        while(p!=id[p]){
+        while(p!=id[p]){//循环爹的爹，溯源
             //拒绝中间爹，寻根
             id[p] = id[id[p]];
             p = id[p];
@@ -44,7 +44,7 @@ public:
     void connect(int p,int q){
         int i = find(p), j = find(q);
         if(i!=j){
-            if(size[i]<size[j]){
+            if(size[i]<size[j]){//体量大的当爹
                 id[i]=j;
                 size[j] += size[i];
             }else{

@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-04-17 19:33:25
- * @LastEditTime: 2022-04-17 19:50:34
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-06-02 22:39:42
+ * @LastEditors: Binbin-2593 1600382936@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /.leetcode/并查集/684.冗余连接.cpp
  */
@@ -59,7 +59,7 @@ public:
 
         for(auto e:edges){
             int u = e[0], v = e[1];
-            if(uf.isConnected(u,v))
+            if(uf.isConnected(u,v))//当出现同父时 就是出现闭环的时刻
                 return e;
             uf.connect(u, v);
         }

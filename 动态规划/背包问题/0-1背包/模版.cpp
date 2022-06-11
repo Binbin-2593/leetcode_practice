@@ -2,7 +2,7 @@
  * @Author: Binbin-2593 1600382936@qq.com
  * @Date: 2022-05-09 18:58:55
  * @LastEditors: Binbin-2593 1600382936@qq.com
- * @LastEditTime: 2022-05-13 17:46:30
+ * @LastEditTime: 2022-06-10 16:15:00
  * @FilePath: /.leetcode/动态规划/背包问题/0-1背包/二维.cpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -40,4 +40,57 @@ int knapsack(vector<int>weights,vector<int>values,int N,int W){
         }
     }
     return dp[W];
+}
+
+
+int knapsack(vector<int>weights,vector<int>values,int N,int W){
+    vector<vector<int>> dp(N + 1, vector<int>(W + 1, 0));
+
+    for (int i = 1; i <= N;++i){
+        int w = weights[i - 1], v = values[i - 1];
+        for (int j = 1; j <= W;++j){
+            if(j>=w){
+                dp[i][j] = max(dp[i-1][j],dp[i-1][j-w]+v);
+            }else{
+                dp[i][j]=dp[i - 1][j];
+            }
+        }
+    }
+    return dp[N][W];
+}
+
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+int main(){
+    //输入
+    int N, V;
+    cin >> N >> V;
+    //vector<int> v(N), w(N);
+    int v[N],w[N];
+    for (int i = 0; i < N; ++i)
+    {
+        cin>>v[i]>>w[i];
+    }
+
+    //算法
+    // vector<vector<int>> dp(N + 1, vector<int>(V + 1,0));
+    int dp[N + 1][V + 1];
+    for (int j = 1; j <= N; ++j)
+    {
+        int vj=v[j-1],wj=w[j-1];
+        for (int k = 1;k<=V;++k){
+            if(k>=v){
+                dp[j][k] = max(dp[j-1][k],dp[j-1][k-vj]+wj);
+            }else{
+                dp[j][k] = dp[j - 1][k];
+            }
+        }
+    }
+
+    //输出
+    cout << dp[N][V] << endl;
+    return 0;
 }

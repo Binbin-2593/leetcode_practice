@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-03-16 22:09:44
- * @LastEditTime: 2022-04-06 16:04:59
- * @LastEditors: your name
+ * @LastEditTime: 2022-06-08 16:32:24
+ * @LastEditors: Binbin-2593 1600382936@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /.leetcode/深度优先搜索/朋友圈.cpp
  */
@@ -30,13 +30,11 @@ public:
         vector<bool> visited(n, false);
         for (int i = 0; i < n; ++i){
             if(!visited[i]){
-                dfs(friends,visited);
+                dfs(friends,visited,i);
                 ++count;
-            }
-            
+            }    
         }
-        return count;
-        
+        return count;    
     }
 
     //递归
@@ -46,8 +44,33 @@ public:
         visited[i]=true;
         //step2:开始递归
         for(int j=0; j<n; ++j){
-            if(friends[i][j]==1&&!visited[j])
+            if(friends[i][j]==1&&!visited[j])// &&!visited[j],是因为i是j的朋友已经就有j是i的朋友
                 dfs(friends, visited, j);
+        }
+    }
+};
+
+//默写1
+class Solution{
+public:
+    int findCircleNum(vector<vector<int>>&friends){
+        int n = friends.size(),count=0;
+        vector<bool> visite(n,false);
+        for (int i = 0; i < n;++i){
+            if(!visited[i]){
+                dfs(friends, visited, i);
+                ++count;
+            }
+        }
+        return count;
+    }
+
+    void dfs(vector<vector<int>>&friends,vector<bool>&visited,int i){
+        visited[i]=true;
+        for (int j = 0; j < n; ++j){
+            if(!visited[j]&&friends[i][j]==1){
+                dfs(friends, visited, j);
+            }
         }
     }
 };
