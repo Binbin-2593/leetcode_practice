@@ -2,7 +2,7 @@
  * @Author: Binbin-2593 1600382936@qq.com
  * @Date: 2022-06-03 14:10:57
  * @LastEditors: Binbin-2593 1600382936@qq.com
- * @LastEditTime: 2022-06-03 14:39:43
+ * @LastEditTime: 2022-08-23 18:10:32
  * @FilePath: /.leetcode/树/二叉搜索树/98.验证二叉搜索树.cpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -57,6 +57,23 @@ public:
     //     bool r=dfs(root->right, prev);
     //     return l&&r;
     // }
+};
+
+class Solution {
+    long long perv = LONG_MIN;
+public:
+    bool isValidBST(TreeNode* root) {
+        if(!root)
+            return true;
+        if(!isValidBST(root->left))return false;
+        if(perv>=root->val){
+            return false;
+        }else{
+            perv = root->val;
+        }
+        if(!isValidBST(root->right))return false;
+        return true;
+    }
 };
 // @lc code=end
 

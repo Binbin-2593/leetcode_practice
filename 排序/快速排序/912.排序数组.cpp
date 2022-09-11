@@ -20,6 +20,7 @@ public:
         int i=rand()%(r-l+1)+l;
         swap(nums[i], nums[l]);
 
+        //就选一段的首位做作基础值，将一段分为两段，左边小于base，右边大于base
         int first = l, last = r, base = nums[first];
         while(first<last){
             while(first<last&&nums[last]>=base){

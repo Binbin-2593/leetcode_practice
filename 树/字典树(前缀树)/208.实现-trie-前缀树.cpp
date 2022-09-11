@@ -2,7 +2,7 @@
  * @Author: Binbin-2593 1600382936@qq.com
  * @Date: 2022-03-14 18:44:40
  * @LastEditors: Binbin-2593 1600382936@qq.com
- * @LastEditTime: 2022-06-07 21:16:47
+ * @LastEditTime: 2022-08-25 23:33:50
  * @FilePath: /.leetcode/树/字典树/208.实现-trie-前缀树.cpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -23,11 +23,6 @@ private:
     //节点内容
     vector<Trie*> children;
     bool isEnd;
-    /*struct TrieNode{
-       bool isEnd; //该结点是否是一个串的结束
-       TrieNode* children[26]; //字母映射表
-    }
-    */
 
     Trie* searchPrefix(string prefix) {
         Trie* node = this;//指向类对象本身，这里就是指向根节点了

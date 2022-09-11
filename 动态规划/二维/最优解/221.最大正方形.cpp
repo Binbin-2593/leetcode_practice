@@ -1,8 +1,8 @@
 /*
  * @Author: Wangfuchen 1600382936@qq.com
  * @Date: 2022-05-06 12:52:16
- * @LastEditors: Wangfuchen 1600382936@qq.com
- * @LastEditTime: 2022-05-06 15:11:37
+ * @LastEditors: Binbin-2593 1600382936@qq.com
+ * @LastEditTime: 2022-08-01 16:03:12
  * @FilePath: /.leetcode/动态规划/二维/最优解/221.最大正方形.cpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -25,7 +25,7 @@ public:
         for (int i = 1; i <= m;++i){
             for (int j = 1;j <= n;++j){
                 if (matrix[i-1][j-1]=='1'){
-                    dp[i][j] = min(dp[i - 1][j - 1], min(dp[i - 1][j], dp[i][j - 1]))+1;
+                    dp[i][j] = min(dp[i - 1][j - 1], min(dp[i - 1][j], dp[i][j - 1]))+1;//如果其中三者有0，此位置当然只能是1
                 }
                 max_side = max(max_side,dp[i][j]);
             }

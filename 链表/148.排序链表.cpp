@@ -2,7 +2,7 @@
  * @Author: Binbin-2593 1600382936@qq.com
  * @Date: 2022-05-18 19:12:51
  * @LastEditors: Binbin-2593 1600382936@qq.com
- * @LastEditTime: 2022-05-24 17:00:35
+ * @LastEditTime: 2022-08-03 12:25:48
  * @FilePath: /.leetcode/链表/148.排序链表.cpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -67,9 +67,10 @@ public:
             return head;
         }
         if(head->next==tail){
-            head->next=nullptr;
+            head->next=nullptr;//看下面分段的断点，知这里为啥
             return head;
         }
+        //找中点，分段
         ListNode *slow = head, *fast = head;
         while(fast!=tail){
             slow = slow->next;

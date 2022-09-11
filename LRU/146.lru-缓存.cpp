@@ -2,7 +2,7 @@
  * @Author: Binbin-2593 1600382936@qq.com
  * @Date: 2022-06-07 18:21:06
  * @LastEditors: Binbin-2593 1600382936@qq.com
- * @LastEditTime: 2022-06-07 20:23:31
+ * @LastEditTime: 2022-08-09 19:38:00
  * @FilePath: /.leetcode/LRU/146.lru-缓存.cpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -32,10 +32,10 @@ public:
 
     void put(int key, int value) {
         auto it = hash.find(key);
-        if(it!=hash.end()){
+        if(it!=hash.end()){//已存在
             it->second->second = value;
             cache.splice(cache.begin(), cache, it->second);//最近访问放链首
-        }else{
+        }else{//不存在
             cache.emplace(cache.begin(), make_pair(key, value));//链首插入
             hash[key] = cache.begin();
             if(cache.size()>size){

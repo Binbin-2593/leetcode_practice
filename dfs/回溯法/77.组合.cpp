@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-04-07 22:08:41
- * @LastEditTime: 2022-04-13 14:00:27
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-08-07 21:31:31
+ * @LastEditors: Binbin-2593 1600382936@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE    
  * @FilePath: /.leetcode/深度优先搜索/回溯法/77.组合.cpp
  */
@@ -41,6 +41,27 @@ public:
         }
     }
 
+};
+//使用基本套路
+class Solution {
+    vector<vector<int>>ret;
+    vector<int> tmp;
+public:
+    vector<vector<int>> combine(int n, int k) {
+        backtrack(n,k,1);
+        return ret;
+    }
+    void backtrack(int n,int k,int begin){
+        if(tmp.size()==k){
+            ret.emplace_back(tmp);
+            return;
+        }
+        for(int i=begin;i<=n;++i){
+            tmp.push_back(i);
+            backtrack(n,k,i+1);
+            tmp.pop_back();
+        }
+    }
 };
 // @lc code=end
 

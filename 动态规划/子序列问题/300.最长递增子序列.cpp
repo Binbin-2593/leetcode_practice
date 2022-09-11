@@ -2,7 +2,7 @@
  * @Author: Binbin-2593 1600382936@qq.com
  * @Date: 2022-05-09 10:35:54
  * @LastEditors: Binbin-2593 1600382936@qq.com
- * @LastEditTime: 2022-05-09 21:21:47
+ * @LastEditTime: 2022-08-10 22:06:36
  * @FilePath: /.leetcode/动态规划/子序列问题/300.最长递增子序列.cpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -60,24 +60,24 @@ public:
         return ans; 
     }
 };
-//dp+二分
+//贪心+二分
 class Solution{
 public:
     int lengthOfLIS(vector<int>&nums){
         int ans = 0, n = nums.size();
-        vector<int> dp;
-        dp.push_back(nums[0]);
+        vector<int> vec;
+        vec.push_back(nums[0]);
         for (int i = 1;i<n;++i){
-            if(dp.back()<nums[i]){
-                dp.push_back(nums[i]);
+            if(vec.back()<nums[i]){
+                vec.push_back(nums[i]);
             }else{
-                auto iter = lower_bound(dp.begin(), dp.end(), nums[i]);
+                auto iter = lower_bound(vec.begin(), vec.end(), nums[i]);
                 //将nums[i]填在它合适的位置，这样增大了递增子序列更长的可能性
                 *iter=nums[i];
                 //注意这里的序列不一定是最长子序列，长度一定是最长子序列的长度
             }
         }
-        return dp.size();
+        return vec.size();
     }//需要查找有关（a<x<b）中x的信息可以二分
 };
 // @lc code=end
