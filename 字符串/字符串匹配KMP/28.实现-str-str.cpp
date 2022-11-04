@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-04-28 17:26:21
- * @LastEditTime: 2022-05-01 14:28:43
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-10-05 14:51:41
+ * @LastEditors: Binbin-2593 1600382936@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /.leetcode/字符串/字符串匹配KMP/28.实现-str-str.cpp
  */
@@ -15,6 +15,13 @@
 // @lc code=start
 class Solution {
 public:
+/*
+思路：
+    首先：求next数组，表示模式串相应位置对应的子串的最大相等前后缀的长度值
+    作用，出现不匹配时回溯模式串重新匹配位置
+
+    然后：手握next和模式串，一起进行匹配
+*/
     int strStr(string haystack, string needle) {
         int k = -1, h_len = haystack.length(), n_len = needle.length();
         if (n_len == 0) return 0;

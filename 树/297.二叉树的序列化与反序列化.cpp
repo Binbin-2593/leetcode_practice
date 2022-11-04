@@ -2,7 +2,7 @@
  * @Author: Binbin-2593 1600382936@qq.com
  * @Date: 2022-05-30 16:31:31
  * @LastEditors: Binbin-2593 1600382936@qq.com
- * @LastEditTime: 2022-06-02 21:51:14
+ * @LastEditTime: 2022-10-14 18:28:18
  * @FilePath: /.leetcode/树/297.二叉树的序列化与反序列化.cpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -135,46 +135,26 @@ public:
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
-class Codec {
-public:
-
-    // Encodes a tree to a single string.
-    string serialize(TreeNode* root) 
-    {
-        string res = "";
-
-        std::function<void(TreeNode *)> dfs1 = [&] (TreeNode * rt)
-        {
-            if (rt == NULL)
-            {
-                res += "NULL ";     //用空格分隔开
-                return;
-            }
-            res += to_string(rt->val);
-            res += ' ';
-            dfs1(rt->left);
-            dfs1(rt->right);   
-        };
-
-        dfs1(root);
-        
-        return res;
-
-    }
-
-    // Decodes your encoded data to tree.
+class Codec {        
+    string res = "";
+    //使用流读取，遇空格，停止的特性，将序列通过流逐个节点地读取
     stringstream datas;
     string tmp;
-    
-    TreeNode* deserialize(string data) 
-    {
-        this->datas << data;
-        return dfs2();
-    }
+    //前序递归
+    void dfs1 (TreeNode * rt){
+        //空格隔开是为了后面的流操作
+        if (!rt){
+            res += "NULL ";     //用空格分隔开
+            return;
+        }
+        res += to_string(rt->val)+" ";
+ 
+        dfs1(rt->left);
+        dfs1(rt->right);   
+    };
 
-
-    TreeNode * dfs2()
-    {
+    TreeNode * dfs2(){
+        //遇空格停止
         datas >> tmp;
         if (tmp == "NULL")
             return NULL;
@@ -183,7 +163,18 @@ public:
         rt->right = dfs2();
         return rt;
     }
+public:
+    //序列化
+    string serialize(TreeNode* root) {
+        dfs1(root);
+        return res;
+    }
 
+    // 反序列化
+    TreeNode* deserialize(string data) {
+        this->datas << data;
+        return dfs2();
+    }
 };
 
 class Codec {

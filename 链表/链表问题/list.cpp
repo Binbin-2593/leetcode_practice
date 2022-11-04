@@ -2,7 +2,7 @@
  * @Author: Binbin-2593 1600382936@qq.com
  * @Date: 2022-08-13 12:48:31
  * @LastEditors: Binbin-2593 1600382936@qq.com
- * @LastEditTime: 2022-08-13 13:12:55
+ * @LastEditTime: 2022-09-29 15:53:36
  * @FilePath: /.leetcode/链表问题/list.cpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -18,12 +18,27 @@ ListNode* reverse(ListNode* head){
     head->next=nullptr;
     return newHead;
 }
-
+//迭代
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+       if(!head||!head->next)return head;
+       ListNode*cur=head,*per=nullptr,*next=nullptr;
+       //核心围绕着cur走，per、next是同步cur的附庸
+       while(cur){
+           next = cur->next;
+           cur->next = per;
+           per = cur;
+           cur=next;
+       }
+       return per;
+    }
+};
 pair<ListNode*,ListNode*> reverse2(ListNode* head,ListNode* tail){
-    ListNode *prev = tail, *cur = head, *next = nullptr;
+    ListNode *prev = tail->next, *cur = head, *next = nullptr;
     while(prev != tail){
-        next = head->next;
-        head->next=prev;
+        next = cur->next;
+        cur->next=prev;
         prev = cur;
         cur = next;
     }
@@ -48,6 +63,7 @@ ListNode* merge(ListNode*l1,ListNode*l2){
 //3.链表找中点，平分两段
 ListNode* midNode(ListNode* head){
     ListNode *slow = head, *fast = head;
+    //注意循环条件的得来：要fast=fast->next->next;,所以要fast->next->next真，而前提fast->next真;
     while(fast->next&&fast->next->next){
         slow = slow->next;
         fast = fast->next->next;
@@ -60,15 +76,15 @@ ListNode *l1 = head;
 
 //4.找到链表倒数第n点
 ListNode* retNNode(ListNode* head,int n){
-    ListNode *dummy = new ListNode(0, head),*prev=dummy,*fast=head;
+    ListNode *dummy = new ListNode(0, head),*slow=dummy,*fast=head;
     while(n--){
         fast = fast->next;
     }
     while(fast){
         fast = fast->next;
-        prev = prev->next;
+        slow = slow->next;
     }
-    return Nnode=prev->next;
+    return Nnode=slow->next;
 }
 //5.链表有环
 bool cycleList(ListNode *head){

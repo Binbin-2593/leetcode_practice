@@ -2,7 +2,7 @@
  * @Author: Binbin-2593 1600382936@qq.com
  * @Date: 2022-08-09 15:02:04
  * @LastEditors: Binbin-2593 1600382936@qq.com
- * @LastEditTime: 2022-09-07 20:46:05
+ * @LastEditTime: 2022-09-30 12:41:10
  * @FilePath: /.leetcode/复习.cpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -3320,3 +3320,1180 @@ int main(){
 }
 
 
+class Solution {
+private:
+    static bool cmp(int &a,int &b){
+        string sa = to_string(a), sb = to_string(b);
+        return sa + sb > sb + sa;
+    }
+public:
+    string largestNumber(vector<int>&nums){
+        string ret;
+        sort(nums.begin(), nums.end(), cmp);
+        for(int& n:nums){
+            ret+=to_string(n);
+        }
+        if(ret[0]=='0')
+            return "0";
+        return ret;
+    }
+}
+class Solution {
+    unordered_map<Node *, Node *> hash;
+
+public:
+    Node* copyRandomList(Node* head) {
+        if(!head)
+            return nullptr;
+        if(!hash.count(head)){
+            Node *newNode = new Node(head->val);
+            hash[head] = newNode;
+            newNode->next = copyRandomList(head->next);
+            newNode->random = copyRandomList(head->random);
+        }
+        return hash[head];
+    }
+};
+class Solution {
+public:
+    int calculate(string s) {
+        stack<int> st;
+        int falg = 1;
+        st.push(1);
+
+        int n = s.size(), ret = 0,i=0;
+        while(i<n){
+            if(s[i]==' '){
+                ++i;
+            }else if(s[i]=='+'){
+                falg = st.top();
+                ++i;
+            }else if (s[i] == '-'){
+                falg = -st.top();
+                ++i;
+            }else if (s[i] == '('){
+                st.push(falg);
+                ++i;
+            }else if(s[i]==')'){
+                st.pop();
+                ++i;
+            }else{
+                long num=0;
+                while(i<n&&isdigit(s[i])){
+                    num = num * 10 + s[i] - '0';
+                    ++i;
+                }
+                ret += falg*num;
+            }
+            return ret;
+        }
+    }
+};
+class Solution {
+private:
+    static bool cmp(int &a,int &b){
+        string sa = to_string(a);
+        string sb = to_string(b);
+        return sa + sb > sb + sa;
+    }
+
+public:
+    string largestNumber(vector<int>& nums) {
+        string ans = "";
+        sort(nums.begin(), nums.end(), cmp);
+        for(int &n:nums){
+            ans+=to_string(n);
+        }
+        return ans[0] == '0' ? "0" : ans;
+    }
+};
+class Solution {
+public:
+    int calculate(string s) {
+        vector<int> v;
+        char prev = '+';
+        int num = 0;
+        for (int i = 0; i < s.size();++i){
+            if(isdigit(s[i])){
+                num = num * 10 + s[i] - '0';
+            }
+            //一个数字结束，要进行操作
+            if(!isdigit(s[i])&&s[i]!=' '||i==s.size()-1){
+                switch(prev){
+                    case '+':
+                        v.push_back(num);
+                        break;
+                    case '-':
+                        v.push_back(-num);
+                        break;
+                    case '*':
+                        v.back() *= num;
+                        break;
+                    default:
+                        v.back() /= num;
+                    }
+                num = 0;
+                prev = s[i];
+            } 
+        }
+        return accumulate(v.begin(), v.end(), 0);
+    }
+};
+class Solution {
+public:
+    int trap(vector<int>& h) {
+        int ret = 0, l = 0, r = h.size() - 1, lMax = 0, rMax = 0;
+        while(l<r){
+            //维护朝向单调增
+            lMax = max(lMax, h[l]);
+            rMax = max(rMax, h[r]);
+            //由于Max向着扫描方向维持着单调性，所以走到某个位置直接可以通过比较确定当前雨水量
+            if(h[l]<h[r]){
+                ret += lMax - h[l];
+                ++l;
+            }else{
+                ret += rMax - h[r];
+                --r;
+            }
+        }
+        return ret;
+    }
+};
+class Solution {
+public:
+    int trap(vector<int>& h) {
+        int ret = 0, l = 0, r = h.size() - 1, lMax = 0, rMax = 0;
+        while(l<r){
+            //维护朝向的单调增
+            lMax = max(lMax, h[l]);
+            rMax = max(rMax, h[r]);
+
+            //下面双指针的特征，遇到情况处理
+            if(h[l]<h[r]){
+                ret += lMax - h[l];
+                ++l;
+            }else{
+                ret += rMax - h[r];
+                --r;
+            }
+        }
+        return ret;
+    }
+};
+class Solution {
+public:
+    int trap(vector<int>& h) {
+        int n=h.size();
+        if(n==0)
+            return 0;
+        vector<int>leftMax(n),rightMax(n);
+        leftMax[0] = h[0];
+        for (int i = 1; i < n;++i){
+            leftMax[i] = max(leftMax[i - 1], h[i]);
+        }
+        rightMax[n - 1] = h[n - 1];
+        for (int i = n - 2; i >= 0;--i){
+            rightMax[i] = max(rightMax[i + 1], h[i]);
+        }
+        int ret = 0;
+        for (int i = 0; i < n;++i){
+            ret += min(leftMax[i], rightMax[i]) - h[i];
+        }
+        return ret;
+    }
+};
+class Solution {
+public:
+    int trap(vector<int>& h) {
+        int ret = 0, n = h.size();
+        if(h==0)
+            return 0;
+        vector<int> lMax(n), rMax(n);
+        lMax[0] = h[0], rMax[n - 1] = h[n - 1];
+
+        for (int i = 1; i < n;++i){
+            lMax[i] = max(lMax[i - 1], h[i]);
+        }
+        for (int j = n - 2; j >= 0;--j){
+            rMax = max(rMax[j + 1], h[j]);
+        }
+
+        for (int i = 0; i < n;++i){
+            ret += min(lMax[i], rMax[i]) - h[i];
+        }
+        return ret;
+    }
+};
+class LRUCache {
+public:
+    LRUCache(int capacity):m_c(capacity){}
+    
+    int get(int key) {
+        auto it=hash.find(key);
+        if(it==hash.end())
+            return -1;
+        cache.splice(cache.begin(), cache, it->second);
+        return it->second->second;
+    }
+
+    void put(int key, int value) {
+        auto it = hash.find(key);
+        if(it!=hash.end()){
+            it->second->second = value;
+            cache.splice(cache.begin(), cache, it->second);
+        }else{
+            cache.emplace(cache.begin(), make_pair(key, value));
+            hash[key] = cache.begin();
+            if(cache.size()>m_c){
+                hash.erase(cache.back().first);
+                cache.pop_back();
+            }
+        }
+    }
+
+private:
+    int m_c;
+    list<pair<int, int>> cache;
+    unordered_map<int, list<pair<int, int>>::iterator> hash;
+};
+class LRUCache {
+public:
+    LRUCache(int capacity):m_c(capacity) {}
+    
+    int get(int key) {
+        auto it = hash.find(key);
+        if (it==hash.end()){
+            return -1;
+        }
+        //splice字符串剪贴函数，将it->second的元素剪贴到首部(此函数操作对象时迭代器)
+        cache.splice(cache.begin(), cache, it->second);
+        return it->second->second;
+    }
+
+    void put(int key, int value) {
+        auto it = hash.find(key);
+        if (it!=hash.end()){
+            it->second->second = value;
+            cache.splice(cache.begin(), cache, it->second);
+        }else{
+            cache.emplace(cache.begin(), make_pair(key, value));
+            hash[key]=cache.begin();
+
+            if(cache.size()>m_c){
+                hash.erase(cache.back().first);
+                cache.pop_back();
+            }
+        }
+    }
+
+private:
+    int m_c;
+    //当既要k索引v，又要v索引k，使用如下存储方式
+    list<pair<int, int>> cache;//存放k-v
+    unordered_map<int, list<pair<int, int>>::iterator> hash;//以k索引k-v节点的
+};
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+       if(!head||!head->next)
+           return head;
+       ListNode *p=head;
+
+       while(p->next){
+           if(p->val==p->next->val){
+               p->next = p->next->next;
+           }else{
+               p = p->next;
+           }
+       }
+       return head;
+    }
+};
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+       if(!head||!head->next)
+           return head;
+       ListNode *newHead = reverseList(head->next);
+       head->next->next = head;
+       head->next = nullptr;
+       return newHead;
+    }
+};
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+       if(!head||!head->next)return head;
+       ListNode *p = nullptr, *cur = head;
+       while(cur){
+           ListNode *next = cur->next;
+           cur->next = p;
+
+           p = cur;
+           cur = next;
+       }
+       return p;
+    }
+};
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        ListNode *dummy = new ListNode(head),*p=dummy,*cur=head;
+        while(cur&&cur->next){
+            if(cur->val==cur->next->val){
+                //遇到等值的点，先处理了这两个，拿到值后面一个一个地对比
+                int tmp = cur->val;
+                cur = cur->next->next;
+
+                while(cur&&cur->val==tmp){
+                    cur = cur->next;
+                }
+                //问题点都跑完了，再接上
+                p->next = cur;
+            }else{
+                cur=cur->next;
+                p = p->next;
+            }
+        }
+        ListNode *newHead = dummy->next;
+        delete dummy;
+        return newHead;
+    }
+};
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        if(!root)
+            return {};
+        vector<vector<int>> ret;
+        queue<TreeNode * > q;
+        q.push(root);
+        while(!q.empty()){
+            int sz = q.size();
+            ret.emplace_back({});
+            while (sz--){
+                TreeNode*root=q.front();
+                q.pop();
+                ret.back().push_back(root->val);
+                if(root->left)
+                    q.push(root->left);
+                if(root->right)
+                    q.push(root->right);
+            }
+        }
+        return ret;
+    }
+};
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> ret;
+        dfs(root,ret);
+        return ret;
+    }
+    void dfs(TreeNode* root,vector<int>&ret){
+        if(!root)
+            return;
+        ret.emplace_back(root->val);
+        dfs(root->left, ret);
+        dfs(root->right, ret);
+    }
+};
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        if(!root)
+            return {};
+        vector<int> ret;
+        stack<TreeNode *> st;
+        while(root||!st.empty()){
+            while(root){
+                ret.emplace_back(root->val);
+                st.push(root);
+                root=root->left;
+            }
+            root = st.top()->right;
+            st.pop();
+        }
+        return ret;
+    }
+};
+pair<ListNode*,ListNode*> myReverse(ListNode*head,ListNode*tail){
+        ListNode*prev=tail->next,*cur=head,*next=nullptr;
+        while(prev!=tail){
+            next = cur->next;
+            cur->next = prev;
+            prev = cur;
+            cur = next;
+        }
+        return {tail,head};
+    }
+
+class Solution {
+public:
+    TreeNode *lowestCommonAncestor(TreeNode*root,TreeNode*p,TreeNode*q){
+        if(!root||root==p||root==q)
+            return head;
+        ListNode *left = lowestCommonAncestor(root->left);
+        ListNode *right = lowestCommonAncestor(root->right);
+        if(!left)return right;
+        if(!right)return left;
+        if(left&&right)return root;
+        return nullptr;
+    }
+};
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
+        return root ? 1 + max(maxDepth(root->left), maxDepth(root->right)) : 0;
+    }
+};
+class Solution {
+public:
+    TreeNode* buildTree(vector<int>&preorder,vector<int>&inorder){
+        int n = preorder.size();
+        if(n==0)
+            return nullptr;
+        unordered_map<int, int> hash;//值——下标
+        for (int i = 0; i < n; ++i){
+            hash.emplace(inorder[i], i);
+        }
+        return dfs(preorder, hash, 0, n - 1, 0);
+    }
+    TreeNode* dfs(vector<int>&preorder,unordered_map<int, int>&hash,int b,int e,int pb){
+        if(b>e)
+            return nullptr;
+        int i = hash[preorder[ps]], leftLen = i - b;
+        TreeNode *root = new TreeNode(preorder[s]);
+        root->left = dfs(preorder, hash, b, i - 1, pb + 1);
+        root->right = dfs(preorder, hash, i + 1, e, s + leftLen + 1);
+        return root;
+    }
+};
+ListNode* merge(ListNode*l1,ListNode*l2){
+    if(!l1){
+        return l2;
+    }else if(!l2){
+        return l1;
+    }else if(l1->val<l2->val){
+        l1->next = merge(l1->next, l2);
+        return l1;
+    }else{
+        l2->next = merge(l1, l2->next);
+        return l2;
+    }
+}
+class Solution {
+public:
+    vector<int> findDisappearedNumbers(vector<int>& nums) {
+        unordered_set<int> hash;
+        for(int&n:nums){
+            hash.insert(n);
+        }
+        vector<int> ret;
+        for (int i = 1; i <= n; ++i){
+            if(!hash.count(i))
+                ret.push_back(i);
+        }
+        return ret;
+    }
+};
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        int ret = 0, prev = 0;
+        unordered_map<int, int> hash;
+        hash[0]++;
+        for(int &n:nums){
+            prev += n;
+            if(hash.count(prev-k))
+                ret += hash[prev - k];
+            hash[prev]++;
+        }
+        return ret;
+    }
+};
+class Solution {
+private:
+    vector<vector<int>> ret;
+    vector<int> path;
+    
+public:
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        backtrace(candidates, target, 0);
+        return ret;
+    }
+    void backtrace(vector<int>&candidates,int target,int pos){
+        if(target<0)
+            return;
+        if(target==0){
+            ret.emplace_back(path);
+            return;
+        }
+        for (int i = pos; i < candidates.size();++i){
+            path.push_back(candidates[i]);
+            backtrace(candidates, target - candidates[i], i);
+            path.pop_back();
+        }
+    }
+};
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int n = prices.size(), f0 = 0, f1 = -prices[0];
+        for (int i = 1; i < n;++i){
+            f0 = max(f0, f1 + prices[i]);
+            f1 = max(f1, f0 - prices[i]);
+        }
+        return f0;
+    }
+};
+class Solution {
+public:
+    int maxProfit(vector<int>& p) {
+        int n = p.size(), f0 = 0, f1 = -p[0];
+        for(int&x:p){
+            f0 = max(f0, f1 + x);
+            f1 = max(f1, f0 - x);
+        }
+        return f0;
+    }
+};
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int n = s.size();
+        if(n<2)return s
+
+        vector<vector<bool>dp(n,vector<bool>(n));
+        int maxL = 0, b = 0;
+
+        for (int i = 0; i < n;++i){
+            dp[i][i] = true;
+        }
+
+        for (int L = 2; L <= n;++L){
+            for (int l = 0; l < n;++l){
+                int r = l + L + 1;
+                if(r>=n)
+                    break;
+                
+                if(s[l]!=s[r]){
+                    dp[l][r] = false;
+                }else{
+                    if(L==2){
+                        dp[l][r] = true;
+                    }else{
+                        dp[l][r] = dp[l + 1][r - 1];
+                    }
+                }
+                if(dp[l][r]&&L>maxL){
+                    maxL = L;
+                    b = l;
+                }
+            }
+        }
+        return s.substr(b, maxL);
+    }
+};
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int ret = 0;
+        vector<int> v(128, 0);
+        for (int l = 0, r = 0; r < s.size(); ++r){
+            ++v[s[r]];
+            while(v[s[r]]>1){
+                --v[s[l]];
+                ++l;
+            }
+            ret = max(ret, r - l + 1);
+        }
+        return ret;
+    }
+};
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode *p = headA,*q=headB;
+        unordered_set<ListNode *> hash;
+        while(p){
+            hash.insert(p);
+            p = p->next;
+        }
+        while(q){
+            if(hash.count(q))
+                return q;
+            q = q->next;
+        }
+        return nullptr;
+    }
+};
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode *p = headA, *q = headB;
+        while(p!=q){
+            p = p ? p->next : headA;
+            q = q ? q->next : headB;
+        }
+        return p;
+    }
+};
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        if(!head)
+            return false;
+        ListNode *slow = head, *fast = head;
+        do{
+            if(!fast->next||!fast->next->next)
+                return false;
+            slow = slow->next;
+            fast = fast->next->next;
+        } while (slow != fast);
+        return true;
+    }
+};
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        int l = 0, r = nums.size() - 1;
+        while(l<r){
+            int m = l + (r - l) / 2;
+            if(nums[m]>nums[m+1])
+                r = m;
+            else
+                l = m + 1;
+        }
+        return l;
+    }
+};
+class Solution {
+    vector<vector<int>> ret;
+
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        dfs(root,0);
+        return ret;
+    }
+    void dfs(TreeNode* root,int level){
+        if(!root)
+            return;
+        if(ret.size()==level){
+            ret.push_back({});
+        }
+        ret[level].push_back(root->val);
+        dfs(root->left, level + 1);
+        dfs(root->right, level + 1);
+    }
+};
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        int fast = 0;
+        for (int i = 0; i < nums.size();++i){
+            if(i<=fast){
+                fast = max(fast, i + nums[i]);
+                if(fast>=nums.size()-1)
+                    return true;
+            } 
+        }
+        return false;
+    }
+};
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int farst = 0, p = 0, n = nums.size(),ret=0;
+        for (int i = 0; i < n - 1;++i){
+            if(i<=farst){
+                farst = max(farst, i + nums[i]);
+                if(i==p){
+                    p = farst;
+                    ++ret;
+                }
+            }
+        }
+        return ret;
+    }
+};
+class Solution {
+    unordered_map<Node *, Node *> hash;
+public:
+    Node* copyRandomList(Node* head) {
+        if(!head)
+            return head;
+        if(!hash.count(head)){
+            ListNode *Newhead = new ListNode(head->val);
+            hash[head] = Newhead;
+            Newhead->next = copyRandomList(head->next);
+            Newhead->random = copyRandomList(head->random);
+        }
+        return hash[head];
+    }
+};
+char* strcpy(char*a,char*b){
+    if(!a||!b){
+        cout << "空指针"<<endl;
+        return nullptr;
+    }
+    char *p = a;
+    while(*b!='\0'){
+        *(p++) = *(b++);
+    }
+    return a;
+}
+class Solution {
+   vector<vector<int>>ret;
+   vector<int>path;
+public:
+    vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
+        dfs(root, targetSum);
+        return ret;
+    }
+    void dfs(TreeNode* root,int targetSum){
+        if(!root)
+            return;
+        path.push_back(root->val);
+        if(!root->left&&!root->right&&root->val==targetSum){
+            ret.push_back(path);
+        }
+        dfs(root->left, targetSum-root->val);
+        dfs(root->right, targetSum-root->val);
+        path.pop_back();
+    }
+};
+class Solution {
+    int ret = 0, tmp = 0;
+
+public:
+    int sumNumbers(TreeNode* root) {
+        dfs(root);
+        return ret;
+    }
+    void dfs(TreeNode*root){
+        if(!root)
+            return;
+        tmp=tmp * 10 + root->val;
+        if(!root->left&&!root->right)
+            ret += tmp;
+        dfs(root->left);
+        dfs(root->right);
+        tmp /= 10;
+    }
+};
+    ListNode* midNode(ListNode* head){
+        //默认head!=nullptr
+        ListNode *slow = head, *fast = head;
+        while(fast->next&&fast->next->next){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        return slow;
+    }
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        int n = s.szie();
+        vector<bool> dp(n + 1, false);
+        dp[0] = true;
+        for(int i=1;i<=n;++i){
+            for(auto&w:wordDict){
+                int len = w.length();
+                if(i>=len&&w==s.substr(i-len,len)){
+                    dp[i] = dp[i] || dp[i - len];
+                }
+            }
+        }
+        return dp[n];
+    }
+};
+class Solution {
+public:
+    int KLargest(vector<int>&nums,int k){
+        int pos = 0, l = 0, r = nums.size() - 1;
+        while(1){
+            pos=help(nums,l,r);
+            if(pos==k-1){
+                return nums[pos];
+            }else if(pos<k-1){
+                l = pos + 1;
+            }else{
+                r = pos - 1;
+            }
+        }
+    }
+    int help(vector<int>&nums,int l,int r){
+        int base = nums[l];
+        while(l<r){
+            while(l<r&&nums[r]<=base){
+                --r;
+            }
+            nums[l] = nums[r];
+            while(l<r&&nums[l]>=base){
+                ++l;
+            }
+            nums[r] = nums[l];
+        }
+        nums[l] = base;
+        return l;
+    }
+};
+class Solution {
+public:
+    vector<int> sortArray(vector<int>& nums) {
+        srand(time(NULL));
+        sort(nums, 0, nums.size() - 1);
+        return nums;
+    }
+    void sort(vector<int>&nums,int l,int r){
+        if(l>=r)
+            return;
+        int p = rand() % (r - l + 1)+l;
+        swap(nums[l], nums[p]);
+
+        int b = l, e = r,base = nums[b];
+        while(b<e){
+            while(b<e&&nums[e]>=base){
+                e--;
+            }
+            nums[b] = nums[e];
+            while(b<e&&nums[b]<=base){
+                ++b;
+            }
+            nums[e] = nums[b];
+        }
+        nums[b] = base;
+        sort(nums, l, b);
+        sort(nums, b + 1, r);
+    }
+};
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        vector<int>ret;
+        deque<int> q;
+        for (int i = 0; i < nums.size();++i){
+            while(q.size()&&i-k+1>q.front()){
+                q.pop_front();
+            }
+
+            while(q.size()&&nums[i]>nums[q.back()]){
+                q.pop_back();
+            }
+            q.push_back(i);
+            if(i-k+1>=0){
+                ret.push_back(nums[i]);
+            }
+        }
+
+        return ret;
+    }
+};
+class Single{
+public:
+    static Single* GetInstance();
+private:
+    Single();
+    Single(Single &instance);
+    Single &operator=(Single &instance);
+    ~Single();
+};
+Single* Single::GetInstance(){
+    static Single instance;
+    return &instance;
+}
+int main(){
+    Single *instance = Single::GetInstance();
+}
+
+class LRUCache {
+public:
+    LRUCache(int capacity):m_c(capacity) {}
+    
+    int get(int key) {
+        auto it = hash.find(key);
+        if(it==hahs.end())return -1;
+        cache.splice(cache.begin(), cache, it->second);
+        return it->second->second;
+    }
+
+    void put(int key, int value) {
+        auto it = hash.find(key);
+        if(it!=hash.end()){
+            cache.splice(cache.begin(), cache, it->second);
+            it->second->second = value;
+        }else{
+            cache.emplace(cache.begin(), make_pair(key, value));
+            hash[k]=cache.begin();
+
+            if(cache.size()>m_c){
+                hash.erase(cache.back().first);
+                cache.pop_back();
+            }
+        }
+    }
+
+private:
+    int m_c;
+    list<pair<int,int>>cache;
+    unordered_map<int, list<pair<int, int>>::iterator> hash;
+};
+class Solution {
+public:
+    vector<int> sortArray(vector<int>& nums) {
+        srand(time(0));
+        quick_sort(nums, 0, nums.size() - 1);
+        return nums;
+    }
+    void quick_sort(vector<int>&nums,int first,int last){
+        if(first>=last)return;
+        int pos = rand() % (last - first + 1)+first;
+        swap(nums[pos], nums[first]);
+        
+        int l=first,r=last,base = nums[l];
+        while(l<r){
+            while(l<r&&nums[r]>=base){
+                --r;
+            }
+            nums[l] = nums[r];
+            while(l<r&&nums[l]<=base){
+                ++l;
+            }
+            nums[r] = nums[l];
+        }
+        nums[l]=base;//这里的l是移动后更新的l
+
+        quick_sort(nums,first,l);
+        quick_sort(nums,l+1,last);
+    }
+};
+class Solution {
+public:
+    vector<int> sortArray(vector<int>& nums) {
+        srand(time(0));
+        sort(vector<int> & nums, 0, nums.size()-1);
+        return nums;
+    }
+    void sort(vector<int>&nums,int b,int e){
+        if(b>=e)
+            return;
+        int pos = rand() % (b - e + 1) + b;
+        swap(nums[pos], nums[b]);
+        int l = b, r = e, base = nums[l];
+        while(l<r){
+            while(l<r&&nums[r]>=base){
+                --r;
+            }
+            nums[l] = nums[r];
+            while(l<r&&nums[l]<=base){
+                ++l;
+            }
+            nums[r] = nums[l];
+        }
+        nums[l] = base;
+        sort(nums, b, l);
+        sort(nums, l + 1, e);
+    }
+};
+void maopao(vector<int>&nums){
+    int n = nums.size();
+    for (int i = 0; i < n - 1;++i){//扫n-1趟，每趟产生一个最值
+        for (int j = 0; j < n - 1 - i;++j){
+            if(nums[j]>nums[j+1]){
+                swap(nums[j], nums[j + 1]);
+            }
+        }
+    }
+}
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if(!head||!head->next)
+           return head;
+        ListNode *cur = head, *prev = nullptr, *next = nullptr;
+        while(cur){
+            next = cur->next;
+            cur->next = prev;
+            prev = cur;
+            cur = next;
+        }
+        return prev;
+    }
+};
+pair<ListNode*,ListNode*> reverse2(ListNode* head,ListNode* tail){
+    ListNode *prev = tail->next, *cur = head, *next = nullptr;
+    while(prev != tail){
+        next = cur->next;
+        cur->next=prev;
+        prev = cur;
+        cur = next;
+    }
+    return {tail, head};
+}
+ListNode* merge(ListNode*l1,ListNode*l2){
+    if(!l1){
+        return l2;
+    }else if(!l2){
+        return l1;
+    }else if(l1->val<l2->val){
+        l1->next = merge(l1->next, l2);
+        return l1;
+    }else{
+        l2->next = merge(l1, l2->next);
+        return l2;
+    }
+}
+ListNode* retNNode(ListNode* head,int n){
+    ListNode *dummy = new ListNode(0, head),*slow=dummy,*fast=head;
+    while(n--){
+        fast = fast->next;
+    }
+    while(fast){
+        fast = fast->next;
+        slow = slow->next;
+    }
+    return Nnode=slow->next;
+}
+ListNode* retNNode(ListNode* head,int n){
+    ListNode *dummy = new ListNode(0, head), *slow = dummy, *fast = head;
+    while(n--){
+        fast = fast->next;
+    }
+    while(fast){
+        fast=fast->next;
+        slow = slow->next;
+    }
+    return slow->next;
+}
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        int n=nums.size();
+        for(int &m:nums){
+            if(m<=0){
+                m = n + 1;
+            }
+        }
+
+        for (int i = 0; i < n;++i){
+            int m = abs(nums[i]);
+            if(m<=n){
+                nums[m - 1] = -abs(nums[m - 1]);
+            }
+        }
+        for (int i = 0;i<n;++i){
+            if(nums[i]>0)
+                return i + 1;
+        }
+
+        return n + 1;
+    }
+};
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        int n=nums.size();
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> ret;
+
+        for (int first = 0; first < n;++first){
+            if(first>0&&nums[first]==nums[first-1])
+                continue;
+            int target = -nums[first];
+            int third = n - 1;
+
+            for (int second = first + 1; second < n;++second){
+                if(second>first+1&&nums[second]==nums[second-1])continue;
+                while(second<third&&nums[second]+nums[third]>target){
+                    --third;
+                }
+                if(second==third)
+                    break;//没找到第三个数
+                if(nums[second]+nums[third]==target){
+                    ret.emplace_back(vector<int>{nums[first], nums[second], nums[third]});
+                }
+            }
+        }
+        return ret;
+    }
+};
+class Solution {
+public:
+    int myAtoi(string s) {
+        char prev = '+';
+        long tmp = 0;
+        int i = 0, n = s.szie();
+        while(i<n){
+            if(isalpha(s[i])||s[i]=='.')
+                return 0;
+            while(i<n&&s[i]==' '){
+                ++i;
+            }
+
+            if(i<n&&s[i]=='+'){
+                if(i<n-1&&!isdigit(s[i+1]))
+                    return 0;
+                else{
+                    ++i;
+                    prev = '+';
+                }
+            }
+            if(i<n&&s[i]=='-'){
+                if(i<n-1&&!isdigit(s[i+1]))
+                    return 0;
+                else{
+                    ++i;
+                    prev = '-';
+                }
+            }
+
+            //遍历数字
+            if(i<n&&isdigit(s[i])){
+                while(i<n&&isdigit(s[i])){
+                    tmp = tmp * 10 + s[i] - '0';
+                    tmp = (prev == '-') ? min(tmp, -(long long)INT_MIN) : min(tmp, (long long)INT_MAX);
+                    ++i;
+                }
+                return (prev == '-') ? -tmp : tmp;
+            }
+        }
+        return 0;
+    }
+}i;
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        //字符串查找的问题，由于随机存取，
+        //首先hash把参考字符串存一下
+        vector<int> chars(128, 0);
+        for(auto& c:t){
+            ++chars[c];
+        }
+
+        //双指针滑动窗口扫描
+        int count = 0,l=0,min_l=0,min_size=s.size()+1;
+        for (int r = 0; r < s.size(); ++r){
+            if(--chars[s[r]]>=0){
+                ++count;
+            }
+
+            //if目前滑动窗口中已经包含t中所有
+            //尝试移动l右移
+            while(count==t.size()){
+                if(r-l+1<min_size){
+                    //记录
+                    min_l = l;//用于最后取子串的起始位置
+                    min_size = r - l + 1;//用于最后取子串的大小
+                }
+                //看移动l导致的count情况
+                if(++chars[s[l]]>0){
+                    --count;
+                }
+                ++l;
+            }
+        }
+        return min_size > s.size() ? "" : s.substr(min_l, min_size);
+    }
+};

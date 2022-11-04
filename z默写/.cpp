@@ -2,16 +2,14 @@
  * @Author: Binbin-2593 1600382936@qq.com
  * @Date: 2022-08-25 22:33:01
  * @LastEditors: Binbin-2593 1600382936@qq.com
- * @LastEditTime: 2022-09-04 23:19:15
+ * @LastEditTime: 2022-09-29 01:34:03
  * @FilePath: /.leetcode/z默写/.cpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 //LRU
 class LRUCache {
 public:
-    LRUCache(int capacity):m_c(capacity) {
-       // m_c=capacity;
-    }
+    LRUCache(int capacity):m_c(capacity) {}
     
     int get(int key) {
         auto it = hash.find(key);
@@ -25,8 +23,8 @@ public:
     void put(int key, int value) {
         auto it = hash.find(key);
         if (it!=hash.end()){
-            it->second->second = value;
             cache.splice(cache.begin(), cache, it->second);
+            it->second->second = value;
         }else{
             cache.emplace(cache.begin(), make_pair(key, value));
             hash[key]=cache.begin();
@@ -67,7 +65,7 @@ public:
             }
             nums[r] = nums[l];
         }
-        nums[l]=base;
+        nums[l]=base;//这里的l是移动后更新的l
 
         quick_sort(nums,first,l);
         quick_sort(nums,l+1,last);
@@ -795,4 +793,84 @@ String & String::operate =(const String &str){
 // String的析构函数
 String::~String(void){
     delete [] m_data; 
+}
+
+class String{
+public:
+    String();
+    String(const char *str = nullptr);
+    String(const String &str);
+    String &operator=(const String &str);
+    ~String();
+
+private:
+    char *m_d;
+};
+String::String(const char*str=nullptr){
+    if(str==nullptr){
+        m_d = new char[1];
+        *m_d = '\0';
+    }else{
+        int len = strlen(str);
+        m_d = new char[len + 1];//+1,因为strlen不算'\0'
+        strcpy(m_d, str);
+    }
+}
+String::String(const String&str){
+    int len = strlen(str.m_d);
+    m_d = new char[len + 1];//+1,因为strlen不算'\0'
+    strcpy(m_d, str.m_d);
+}
+String& String::operator=(const string&str){
+    if(&str==this){
+        return *this;
+    }else{
+        delete[] m_d;
+        int len = strlen(str.m_d);
+        m_d = new char[len + 1];//+1,因为strlen不算'\0'
+        strcpy(m_d, str.m_d);
+        return *this;
+    }
+}
+String::~String(){
+    delete [] m_d;
+}
+
+class String{
+public:
+    String();
+    String(const char *str);
+    String(const string &str);
+    String &operator=(const String &str);
+    ~string();
+
+private:
+    char *m_d;
+};
+String::String(const char *str){
+    if(str==nullptr){
+        m_d = new char[1];
+        *m_d = '\0';
+    }else{
+        int len = strlen(str);
+        m_d = new char[len + 1];
+        strcpy(m_d, str);
+    }
+}
+String::String(const String&str){
+    int len = strlen(str.m_d);
+    m_d = new char[len + 1];
+    strcpy(m_d, str.m_d);
+}
+String& String::operator=(const string&str){
+    if(this!=&str){
+        delete[] m_d;
+        int len = strlen(str.m_d);
+        m_d = new char[len + 1];
+        strcpy(m_d, str.m_d);
+    }
+    return *this;
+}
+String::~String(){
+    delete[] m_d;
 }

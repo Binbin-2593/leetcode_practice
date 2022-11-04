@@ -2,7 +2,7 @@
  * @Author: Binbin-2593 1600382936@qq.com
  * @Date: 2022-02-24 21:01:28
  * @LastEditors: Binbin-2593 1600382936@qq.com
- * @LastEditTime: 2022-05-24 15:07:43
+ * @LastEditTime: 2022-09-29 14:35:07
  * @FilePath: /.leetcode/排序/插入排序/insert_sort.h
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -18,6 +18,13 @@ void insert_sort(vector<int>& nums,int n){
 //默写1
 void insert_sort(vector<int>&nums,int n){
     for (int i=0;i<n; ++i){
+        for (int j = i; j > 0 && nums[j] < nums[j - 1];--j){
+            swap(nums[j], nums[j - 1]);
+        }
+    }
+}
+void insert_sort(vector<int>&nums,int n){
+    for (int i = 0; i < n;++i){
         for (int j = i; j > 0 && nums[j] < nums[j - 1];--j){
             swap(nums[j], nums[j - 1]);
         }
